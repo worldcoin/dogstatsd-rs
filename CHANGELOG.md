@@ -8,6 +8,12 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.11.0] - 2024-02-20
+
+## Added
+
+- API to Convert datadog client to and from UDP socket - https://github.com/worldcoin/dogstatsd-rs/pull/1
+
 ## [0.11.1] - 2023-11-22
 
 ### Changed
