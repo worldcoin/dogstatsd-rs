@@ -964,6 +964,22 @@ impl std::convert::TryInto<UdpSocket> for Client {
     }
 }
 
+impl std::clone::Clone for Client {
+    fn clone(&self) -> Self {
+        Client {
+            socket: match &self.socket {
+                SocketType::Udp(socket) => SocketType::Udp(socket.try_clone().unwrap()),
+                SocketType::Uds(socket) => SocketType::Uds(socket.try_clone().unwrap()),
+                SocketType::BatchableUdp(_) => panic!("Can't clone batched socket"),
+                SocketType::BatchableUds(_) => panic!("Can't clone batched socket"),
+            },
+            from_addr: self.from_addr.clone(),
+            to_addr: self.to_addr.clone(),
+            namespace: self.namespace.clone(),
+            default_tags: self.default_tags.clone(),
+        }
+    }
+}
 
 mod batch_processor {
     use std::sync::mpsc::Receiver;
